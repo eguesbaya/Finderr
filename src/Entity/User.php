@@ -3,8 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -34,6 +40,44 @@ class User implements UserInterface
      */
     private string $password;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     */
+    private string $userName;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
+     */
+    private Sex $sex;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="user")
+     */
+    private Collection $skill;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private ?\DateTimeInterface $memberSince;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     */
+    private string $country;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="255")
+     */
+    private ?string $city;
+
+    public function __construct()
+    {
+        $this->skill = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -56,7 +100,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return (string) $this->email;
     }
@@ -113,5 +157,90 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function setUserName(string $userName): self
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
+
+    public function getSex(): Sex
+    {
+        return $this->sex;
+    }
+
+    public function setSex(Sex $sex): self
+    {
+        $this->sex = $sex;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Skill[]
+     */
+    public function getSkill(): Collection
+    {
+        return $this->skill;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skill->contains($skill)) {
+            $this->skill[] = $skill;
+            $skill->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        if ($this->skill->removeElement($skill)) {
+            // set the owning side to null (unless already changed)
+            if ($skill->getUser() === $this) {
+                $skill->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMemberSince(): ?\DateTimeInterface
+    {
+        return $this->memberSince;
+    }
+
+    public function setMemberSince(?\DateTimeInterface $memberSince): self
+    {
+        $this->memberSince = $memberSince;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 }
