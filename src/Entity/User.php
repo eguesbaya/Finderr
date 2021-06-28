@@ -6,11 +6,16 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -20,44 +25,53 @@ class User
     private int $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private string $category;
+    private string $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json")
      */
-    private int $level;
+    private array $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private string $password;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     */
+    private string $userName;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
+     */
+    private Sex $sex;
 
     /**
      * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="user")
      */
-    private Skill $skill;
+    private Collection $skill;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private date $memberSince;
+    private ?\DateTimeInterface $memberSince;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
      */
     private string $country;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(max="255")
      */
-    private string $city;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private string $socialNetwork;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Sexe::class, cascade={"persist", "remove"})
-     */
-    private Sexe $sexe;
+    private ?string $city;
 
     public function __construct()
     {
@@ -69,26 +83,97 @@ class User
         return $this->id;
     }
 
-    public function getCategory(): ?string
+    public function getEmail(): ?string
     {
-        return $this->category;
+        return $this->email;
     }
 
-    public function setCategory(string $category): self
+    public function setEmail(string $email): self
     {
-        $this->category = $category;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getLevel(): ?int
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): ?string
     {
-        return $this->level;
+        return (string) $this->email;
     }
 
-    public function setLevel(int $level): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        $this->level = $level;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function setUserName(string $userName): self
+    {
+        $this->userName = $userName;
+
+        return $this;
+    }
+
+    public function getSex(): Sex
+    {
+        return $this->sex;
+    }
+
+    public function setSex(Sex $sex): self
+    {
+        $this->sex = $sex;
 
         return $this;
     }
@@ -155,30 +240,6 @@ class User
     public function setCity(?string $city): self
     {
         $this->city = $city;
-
-        return $this;
-    }
-
-    public function getSocialNetwork(): ?string
-    {
-        return $this->socialNetwork;
-    }
-
-    public function setSocialNetwork(?string $socialNetwork): self
-    {
-        $this->socialNetwork = $socialNetwork;
-
-        return $this;
-    }
-
-    public function getSexe(): ?Sexe
-    {
-        return $this->sexe;
-    }
-
-    public function setSexe(?Sexe $sexe): self
-    {
-        $this->sexe = $sexe;
 
         return $this;
     }

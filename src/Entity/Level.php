@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\SkillRepository;
+use App\Repository\LevelRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SkillRepository::class)
+ * @ORM\Entity(repositoryClass=LevelRepository::class)
  */
-class Skill
+class Level
 {
     /**
      * @ORM\Id
@@ -21,11 +21,6 @@ class Skill
      * @ORM\Column(type="string", length=255)
      */
     private string $name;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="skill")
-     */
-    private ?User $user;
 
     public function getId(): ?int
     {
@@ -40,18 +35,6 @@ class Skill
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=SexeRepository::class)
  */
-class Sexe
+class Sex
 {
     /**
      * @ORM\Id
@@ -20,21 +20,21 @@ class Sexe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $sexe;
+    private string $name;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSexe(): ?string
+    public function getName(): ?string
     {
-        return $this->sexe;
+        return $this->name;
     }
 
-    public function setSexe(string $sexe): self
+    public function setName(string $name): self
     {
-        $this->sexe = $sexe;
+        $this->name = $name;
 
         return $this;
     }
