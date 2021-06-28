@@ -1,0 +1,27 @@
+@import 'variables.scss';
+
+.img_profile {
+    width: 100%;
+    height: auto;
+}
+
+.text1 {
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    color: $light;
+    top: 25%;
+}
+
+.text2 {
+    z-index: 1;
+    position: absolute;
+    text-align: center;
+    color: $light;
+    top: 30%;
+}
+
+.navbar-mid {
+    height: 50px;
+    background-color: $danger;
+}
