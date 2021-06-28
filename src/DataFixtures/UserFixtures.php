@@ -2,14 +2,16 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\User;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
     private $passwordEncoder;
+    public const LOOPNUMBER = 10;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -18,26 +20,21 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $contributor = new User();
-        $contributor->setEmail('contributor@monsite.com');
-        $contributor->setRoles(['ROLE_CONTRIBUTOR']);
-        $contributor->setPassword($this->passwordEncoder->encodePassword(
-            $contributor,
-            'contributor'
-        ));
+        for ($i = 0; $i < self::LOOPNUMBER; $i++) {
+            $faker = Factory::create('FR,fr');
+            $coworker = new User();
+            $coworker->setUserName($faker->firstName() . $faker->lastName());
+            $coworker->setMemberSince($faker->dateTimeBetween('2021-01-01 00:00:00', 'now'));
+            $coworker->setEmail($faker->email());
+            $coworker->setRoles(['ROLE_coworker']);
+            $coworker->setCountry($faker->city());
+            $coworker->setPassword($this->passwordEncoder->encodePassword(
+                $coworker,
+                $faker->password()
+            ));
 
-        $manager->persist($contributor);
-
-        $admin = new User();
-        $admin->setEmail('admin@monsite.com');
-        $admin->setRoles(['ROLE_ADMIN']);
-        $admin->setPassword($this->passwordEncoder->encodePassword(
-            $admin,
-            'admin'
-        ));
-
-        $manager->persist($admin);
-
+            $manager->persist($coworker);
+        }
         $manager->flush();
     }
 }
