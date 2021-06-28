@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "643d05b320bb496b85ffd500f33d0799",
+    "content-hash": "5f4af2cc5a3d2e3bc95e612ef6aa15d2",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -5895,16 +5895,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v5.2.8",
+            "version": "v5.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "dbb555941ea0f6a461e4d26ed4e20dad73991cf4"
+                "reference": "642a43f0c93752df9bab473b14192053c137583b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/dbb555941ea0f6a461e4d26ed4e20dad73991cf4",
-                "reference": "dbb555941ea0f6a461e4d26ed4e20dad73991cf4",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/642a43f0c93752df9bab473b14192053c137583b",
+                "reference": "642a43f0c93752df9bab473b14192053c137583b",
                 "shasum": ""
             },
             "require": {
@@ -5930,7 +5930,7 @@
                 "symfony/twig-bundle": "<4.4"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "^2.0",
+                "doctrine/annotations": "^1.10.4",
                 "symfony/asset": "^4.4|^5.0",
                 "symfony/browser-kit": "^4.4|^5.0",
                 "symfony/console": "^4.4|^5.0",
@@ -5975,7 +5975,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v5.2.8"
+                "source": "https://github.com/symfony/security-bundle/tree/v5.2.10"
             },
             "funding": [
                 {
@@ -5991,7 +5991,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-12T13:14:35+00:00"
+            "time": "2021-05-26T12:52:38+00:00"
         },
         {
             "name": "symfony/security-core",
