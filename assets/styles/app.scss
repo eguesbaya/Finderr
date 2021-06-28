@@ -1,6 +1,7 @@
 @import 'variables.scss';
+@import "~bootstrap/scss/bootstrap";
 
 body {
-    background-color: $wild-color;
-    color: $light;
+    background-color: $light;
+    color: $primary;
 }
