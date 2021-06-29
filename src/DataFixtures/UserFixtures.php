@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
         for ($i = 0; $i < self::LOOPNUMBER; $i++) {
             $faker = Factory::create('FR,fr');
             $coworker = new User();
-            $coworker->setUserName($faker->firstName() . $faker->lastName());
+            $coworker->setUserName($faker->firstName() . ' ' . $faker->lastName());
             $coworker->setMemberSince($faker->dateTimeBetween('2021-01-01 00:00:00', 'now'));
             $coworker->setEmail($faker->email());
             $coworker->setRoles(['ROLE_coworker']);
