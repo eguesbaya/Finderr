@@ -8,7 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class SexFixtures extends Fixture
 {
-    private const SEX = ['Male', 'Female', 'indefined'];
+    private const SEX = ['Male', 'Female', 'Indefined'];
 
     public function load(ObjectManager $manager)
     {

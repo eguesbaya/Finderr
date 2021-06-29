@@ -21,6 +21,7 @@ class HomeController extends AbstractController
         $form = $this->createForm(SearchType::class, $data);
         $form->handleRequest($request);
         $user = $repository->findSearch($data);
+
         return $this->render('home/index.html.twig', ['users' => $user,'form' => $form->createView()]);
     }
 }

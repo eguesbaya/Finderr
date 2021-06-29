@@ -41,12 +41,6 @@ class User implements UserInterface
     private string $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="255")
-     */
-    private string $userName;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
      */
     private Sex $sex;
@@ -56,10 +50,6 @@ class User implements UserInterface
      */
     private ?int $age;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="user")
-     */
-    private Collection $skill;
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -106,6 +96,11 @@ class User implements UserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Skill::class, inversedBy="users")
+     */
+    private ?Skill $skill;
+
 
 
 /************************************************************************************************** getter setter */
@@ -132,14 +127,14 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
+      /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
      */
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return (string) $this->userName;
+        return (string) $this->email;
     }
 
     /**
@@ -196,13 +191,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function setUserName(string $userName): self
-    {
-        $this->userName = $userName;
-
-        return $this;
-    }
-
     public function getSex(): Sex
     {
         return $this->sex;
@@ -223,36 +211,6 @@ class User implements UserInterface
     public function setAge(?int $age): self
     {
         $this->age = $age;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Skill[]
-     */
-    public function getSkill(): ?Collection
-    {
-        return $this->skill;
-    }
-
-    public function addSkill(Skill $skill): self
-    {
-        if (!$this->skill->contains($skill)) {
-            $this->skill[] = $skill;
-            $skill->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSkill(Skill $skill): self
-    {
-        if ($this->skill->removeElement($skill)) {
-            // set the owning side to null (unless already changed)
-            if ($skill->getUser() === $this) {
-                $skill->setUser(null);
-            }
-        }
 
         return $this;
     }
@@ -337,6 +295,18 @@ class User implements UserInterface
     {
         $this->picture = $picture;
         $this->updatedAt = new DateTime('now');
+        return $this;
+    }
+
+    public function getSkill(): ?Skill
+    {
+        return $this->skill;
+    }
+
+    public function setSkill(?Skill $skill): self
+    {
+        $this->skill = $skill;
+
         return $this;
     }
 }
