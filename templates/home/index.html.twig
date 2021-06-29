@@ -1,10 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Welcome on your project 3</h1>
-    <img src="https://media.giphy.com/media/hS58Kb2OOCMPS/giphy.gif" alt="Dewey dancing">
+	<div class="container">
+		<img class="img_profile" src="{{ asset('build/images/gettyimages-697564509-612x612.jpg') }}" alt="profile_image"/>
+        <div class="text1 d-flex justify-content-center col-12">
+            <h2>Nom</h2>
+            <span> - </span>
+            <h2>level</h2>
+        </div>
+        <div class="text2 d-flex justify-content-center col-12">
+            <h2>Age</h2>
+            <span> - </span>
+            <h2>Country</h2>
+            <span> / </span>
+            <h2>town</h2>
+        </div>
+        <div class="navbar-mid">
+        </div>
+	</div>
 
     <footer class="bg-light d-flex flex-row align-items-center justify-content-evenly text-center p-4">
 
