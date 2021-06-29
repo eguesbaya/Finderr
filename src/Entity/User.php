@@ -12,6 +12,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
+use Doctrine\DBAL\Driver\Connection;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -101,7 +102,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Skill::class, inversedBy="users")
      */
-    private ?Collection $skill;
+    private ?Skill $skill;
 
     /**
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender", orphanRemoval=true)
@@ -116,13 +117,6 @@ class User implements UserInterface
 
 
 /************************************************************************************************** getter setter */
-
-    public function __construct()
-    {
-        $this->skill = new ArrayCollection();
-        $this->sent = new ArrayCollection();
-        $this->received = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
