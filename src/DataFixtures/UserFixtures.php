@@ -17,6 +17,8 @@ class UserFixtures extends Fixture
     {
         $this->passwordEncoder = $passwordEncoder;
     }
+    public const LINK_IMAGE = "https://www.fillmurray.com/640/360";
+
 
     public function load(ObjectManager $manager)
     {
@@ -28,6 +30,11 @@ class UserFixtures extends Fixture
             $coworker->setEmail($faker->email());
             $coworker->setRoles(['ROLE_coworker']);
             $coworker->setCountry($faker->city());
+            $urlImage = self::LINK_IMAGE;
+            $path = uniqid() . '.jpg';
+            copy($urlImage, 'public/uploads/' . $path);
+            $imagePath = '/uploads/members/' . $path;
+            $coworker->setPicture($imagePath);
             $coworker->setPassword($this->passwordEncoder->encodePassword(
                 $coworker,
                 $faker->password()
