@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\SexeRepository;
+use App\Repository\SexRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SexeRepository::class)
+ * @ORM\Entity(repositoryClass=SexRepository::class)
  */
 class Sex
 {
