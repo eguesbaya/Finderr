@@ -1,15 +1,61 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Coworkers
+  Mes Collègues
 {% endblock %}
 
 {% block body %}
   <h1>
-    Coworkers
+    Mes Collègues
   </h1>
-  <img src="https://media.giphy.com/media/hS58Kb2OOCMPS/giphy.gif"
-    alt="Dewey dancing" />
+
+  {% for user in users %}
+    <div class="card mb-3" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="{{ user.picture }}" class="img-fluid rounded-start" alt="..." />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h2 class="card-title">
+              {{ user.userName }}
+            </h2>
+            <p class="card-text">
+              {{ user.skill }}
+            </p>
+            <p class="card-text">
+              <small class="text-muted">Membre depuis: {{ user.memberSince ? user.memberSince|date('Y-m-d') : '' }} </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ path(
+        'user_show',
+        {
+          id: user.id
+        }
+      ) }}">
+      show
+    </a>
+    <a href="{{ path(
+        'user_edit',
+        {
+          id: user.id
+        }
+      ) }}">
+      edit
+    </a>
+  {% else %}
+    <tr>
+      <td colspan="9">
+        no records found
+      </td>
+    </tr>
+  {% endfor %}
+
+  <a href="{{ path('user_new') }}">Create new</a>
 
   <footer class="bg-light d-flex flex-row align-items-center justify-content-evenly text-center p-4">
     <svg xmlns="http://www.w3.org/2000/svg"
