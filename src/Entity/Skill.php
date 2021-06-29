@@ -22,8 +22,9 @@ class Skill
      */
     private string $name;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="skill")
+     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="skill")
      */
     private ?User $user;
 

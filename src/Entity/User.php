@@ -57,7 +57,7 @@ class User implements UserInterface
     private ?int $age;
 
     /**
-     * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="user")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="user")
      */
     private Collection $skill;
 
@@ -230,7 +230,7 @@ class User implements UserInterface
     /**
      * @return Collection|Skill[]
      */
-    public function getSkill(): Collection
+    public function getSkill(): ?Collection
     {
         return $this->skill;
     }
