@@ -8,7 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class SkillFixtures extends Fixture
 {
-    private const SKILLS = ['Graphics & Design',
+    public const SKILLS = ['Graphics & Design',
                     'Digital Marketing',
                     'Writing & Translation',
                     'Video & Animation',
