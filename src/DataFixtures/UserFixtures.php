@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\User;
+use App\Entity\Skill;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -18,6 +19,21 @@ class UserFixtures extends Fixture
         $this->passwordEncoder = $passwordEncoder;
     }
     public const LINK_IMAGE = "https://www.fillmurray.com/640/360";
+    public const CITY = ['Biarritz',
+    'Bordeaux',
+    'La Loupe',
+    'Lille',
+    'Lyon',
+    'Marseille',
+    'Nantes',
+    'Orléans',
+    'Paris',
+    'Reims',
+    'Saintes',
+    'Strasbourg',
+    'Toulouse',
+    'Tours'];
+
 
 
     public function load(ObjectManager $manager)
@@ -26,10 +42,14 @@ class UserFixtures extends Fixture
             $faker = Factory::create('FR,fr');
             $coworker = new User();
             $coworker->setUserName($faker->firstName() . $faker->lastName());
+            $coworker->setSex($this->getReference('sex_' . rand(0, 2)));
             $coworker->setMemberSince($faker->dateTimeBetween('2021-01-01 00:00:00', 'now'));
+            $coworker->setAge(rand(20, 80));
+            $coworker->addSkill($this->getReference('skill_' . rand(0, count(SkillFixtures::SKILLS) - 1)));
             $coworker->setEmail($faker->email());
             $coworker->setRoles(['ROLE_coworker']);
-            $coworker->setCountry($faker->city());
+            $coworker->setCountry('France');
+            $coworker->setCity(self::CITY[rand(0, count(self::CITY) - 1)]);
             $urlImage = self::LINK_IMAGE;
             $path = uniqid() . '.jpg';
             copy($urlImage, 'public/uploads/' . $path);
@@ -37,11 +57,21 @@ class UserFixtures extends Fixture
             $coworker->setPicture($imagePath);
             $coworker->setPassword($this->passwordEncoder->encodePassword(
                 $coworker,
-                $faker->password()
+                '12345'
             ));
 
             $manager->persist($coworker);
         }
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
+        return [
+          SexFixtures::class,
+          SkillFixtures::class,
+          LevelFixtures::class,
+        ];
     }
 }
