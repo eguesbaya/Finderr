@@ -8,7 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class SexFixtures extends Fixture
 {
-    private const SEX = ['M', 'F'];
+    private const SEX = ['Male', 'Female', 'indefined'];
 
     public function load(ObjectManager $manager)
     {
@@ -16,9 +16,8 @@ class SexFixtures extends Fixture
             $sex = new Sex();
             $sex->setName($sexName);
             $manager->persist($sex);
-            $this->addReference('sex_' . $key, $sex);
+            $this->addReference('sex' . $key, $sex);
         }
-
         $manager->flush();
     }
 }

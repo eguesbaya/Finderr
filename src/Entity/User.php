@@ -47,7 +47,7 @@ class User implements UserInterface
     private string $userName;
 
     /**
-     * @ORM\OneToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
      */
     private Sex $sex;
 
@@ -139,7 +139,7 @@ class User implements UserInterface
      */
     public function getUsername(): ?string
     {
-        return (string) $this->email;
+        return (string) $this->userName;
     }
 
     /**
