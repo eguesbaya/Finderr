@@ -18,7 +18,8 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Rechercher'
+                    'placeholder' => 'Find coworker',
+                    'class' => 'form-control me-2'
                 ]
             ]);
     }
