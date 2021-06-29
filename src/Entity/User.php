@@ -52,6 +52,11 @@ class User implements UserInterface
     private Sex $sex;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $age;
+
+    /**
      * @ORM\OneToMany(targetEntity=Skill::class, mappedBy="user")
      */
     private Collection $skill;
@@ -72,6 +77,38 @@ class User implements UserInterface
      * @Assert\Length(max="255")
      */
     private ?string $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     */
+    public ?string $picture = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Vich\UploadableField(mapping="picture_file", fileNameProperty="picture")
+     * @Assert\NotBlank(message="Il faut selectionner une photo, veuillez cliquer sur Parcourir")
+     * @Assert\File(
+     * maxSize="2048000",
+     * mimeTypes = {
+     *     "image/png",
+     *     "image/jpeg",
+     *     "image/jpg",
+     *     "image/webp"
+     * })
+    * @var File
+    */
+    private $pictureFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var Datetime
+     */
+    private $updatedAt;
+
+
+
+/************************************************************************************************** getter setter */
 
     public function __construct()
     {
@@ -178,6 +215,18 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getAge(): ?int
+    {
+        return $this->age;
+    }
+
+    public function setAge(?int $age): self
+    {
+        $this->age = $age;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Skill[]
      */
@@ -240,6 +289,42 @@ class User implements UserInterface
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(File $image): self
+    {
+        $this->pictureFile = $image;
+        $this->updatedAt = new DateTime('now');
+        return $this;
+    }
+
+    /**
+     * Get the value of updatedAt
+     *
+     * @return  Datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set the value of updatedAt
+     *
+     * @param  Datetime  $updatedAt
+     *
+     * @return  self
+     */
+    public function setUpdatedAt(Datetime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
