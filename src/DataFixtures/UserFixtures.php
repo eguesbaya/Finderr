@@ -41,19 +41,19 @@ class UserFixtures extends Fixture
         for ($i = 0; $i < self::LOOPNUMBER; $i++) {
             $faker = Factory::create('FR,fr');
             $coworker = new User();
-            $coworker->setUserName($faker->firstName() . $faker->lastName());
+
             $coworker->setSex($this->getReference('sex_' . rand(0, 2)));
             $coworker->setMemberSince($faker->dateTimeBetween('2021-01-01 00:00:00', 'now'));
             $coworker->setAge(rand(20, 80));
-            $coworker->addSkill($this->getReference('skill_' . rand(0, count(SkillFixtures::SKILLS) - 1)));
+            $coworker->setSkill($this->getReference('skill_' . rand(0, 8)));
             $coworker->setEmail($faker->email());
-            $coworker->setRoles(['ROLE_coworker']);
+            $coworker->setRoles(['ROLE_CONTRIBUTOR']);
             $coworker->setCountry('France');
             $coworker->setCity(self::CITY[rand(0, count(self::CITY) - 1)]);
             $urlImage = self::LINK_IMAGE;
             $path = uniqid() . '.jpg';
             copy($urlImage, 'public/uploads/' . $path);
-            $imagePath = '/uploads/members/' . $path;
+            $imagePath = '/uploads/' . $path;
             $coworker->setPicture($imagePath);
             $coworker->setPassword($this->passwordEncoder->encodePassword(
                 $coworker,
