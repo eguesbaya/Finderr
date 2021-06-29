@@ -38,6 +38,26 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $contributor = new User();
+        $contributor->setEmail('contributor@monsite.com');
+        $contributor->setRoles(['ROLE_CONTRIBUTOR']);
+        $contributor->setPassword($this->passwordEncoder->encodePassword(
+            $contributor,
+            'contributor'
+        ));
+
+        $manager->persist($contributor);
+
+        $admin = new User();
+        $admin->setEmail('admin@monsite.com');
+        $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setPassword($this->passwordEncoder->encodePassword(
+            $admin,
+            'admin'
+        ));
+
+        $manager->persist($admin);
+
         for ($i = 0; $i < self::LOOPNUMBER; $i++) {
             $faker = Factory::create('FR,fr');
             $coworker = new User();
@@ -47,7 +67,7 @@ class UserFixtures extends Fixture
             $coworker->setAge(rand(20, 80));
             $coworker->addSkill($this->getReference('skill_' . rand(0, count(SkillFixtures::SKILLS) - 1)));
             $coworker->setEmail($faker->email());
-            $coworker->setRoles(['ROLE_coworker']);
+            $coworker->setRoles(['ROLE_CONTRIBUTOR']);
             $coworker->setCountry('France');
             $coworker->setCity(self::CITY[rand(0, count(self::CITY) - 1)]);
             $urlImage = self::LINK_IMAGE;
