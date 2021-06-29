@@ -328,4 +328,15 @@ class User implements UserInterface
 
         return $this;
     }
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
+        $this->updatedAt = new DateTime('now');
+        return $this;
+    }
 }

@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use App\Entity\Sex;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class SexFixtures extends Fixture
 {
@@ -13,10 +13,10 @@ class SexFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         foreach (self::SEX as $key => $sexName) {
-            $sex = new Skill();
+            $sex = new Sex();
             $sex->setName($sexName);
             $manager->persist($sex);
-            $this->addReference('skill_' . $key, $sex);
+            $this->addReference('sex_' . $key, $sex);
         }
 
         $manager->flush();
