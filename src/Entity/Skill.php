@@ -29,6 +29,11 @@ class Skill
      */
     private Collection $users;
 
+    public function __sleep(): array
+    {
+        return [];
+    }
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
