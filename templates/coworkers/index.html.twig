@@ -21,7 +21,7 @@
               {{ user.userName }}
             </h2>
             <p class="card-text">
-              {{ user.skill }}
+              {{ user.skill.name }}
             </p>
             <p class="card-text">
               <small class="text-muted">Membre depuis: {{ user.memberSince ? user.memberSince|date('Y-m-d') : '' }} </small>
