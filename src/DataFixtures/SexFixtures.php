@@ -16,7 +16,7 @@ class SexFixtures extends Fixture
             $sex = new Sex();
             $sex->setName($sexName);
             $manager->persist($sex);
-            $this->addReference('sex' . $key, $sex);
+            $this->addReference('sex_' . $key, $sex);
         }
         $manager->flush();
     }
