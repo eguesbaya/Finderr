@@ -15,17 +15,21 @@
                 alt="..." />
             <div class="card-img-overlay d-flex flex-column justify-content-end">
                 <section class= "p-3">
-                    <div class="d-flex flex-row flex-md-column align-items-center align-items-md-start justify-content-evenly my-2">
+                    <div class="d-flex flex-column flex-md-row align-items-start justify-content-evenly m-1">
                         <h2 class="card-title">
                             {{ user.username }}
                         </h2>
                         <span class="badge bg-danger card-text">
-                            Membre depuis: {{ user.memberSince ? user.memberSince|date('Y') : '' }}
+                            Member since: {{ user.memberSince ? user.memberSince|date('Y') : '' }}
                         </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-evenly">
-                        <span class="badge bg-primary card-text">{{ user.city }}</span>
-                        <span class="badge bg-primary card-text">{{ user.skill.name }}</span>
+                    <div class="d-flex flex-row">
+                        <span class="badge bg-secondary card-text m-1">{{ user.city }}</span>
+                        <span class="badge bg-secondary card-text m-1">{{ user.age }} yo </span>
+                       {# <span class="badge bg-primary card-text">{{ user.skill.level }}</span>#}
+                    </div>
+                    <div class="d-flex flex-row">
+                        <span class="badge bg-primary card-text m-1">{{ user.skill.name }}</span>
                        {# <span class="badge bg-primary card-text">{{ user.skill.level }}</span>#}
                     </div>
                 </section>
