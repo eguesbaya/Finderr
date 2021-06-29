@@ -1,7 +1,19 @@
 @import 'variables.scss';
+@import 'fonts.scss';
 @import "~bootstrap/scss/bootstrap";
 
 body {
     background-color: $light;
     color: $primary;
+    font-family: Macan;
+}
+
+h1{
+    font-family: Macan;
+    font-weight: bold;
+}
+
+.navbar-brand{
+    font-family: Macan;
+    font-weight: bold;
 }
