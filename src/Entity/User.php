@@ -46,7 +46,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
      */
-    private Sex $sex;
+    private ?Sex $sex;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -113,8 +113,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="recipient", orphanRemoval=true)
      */
     private $received;
-
-
 
 /************************************************************************************************** getter setter */
 
@@ -199,7 +197,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getSex(): Sex
+    public function getSex(): ?Sex
     {
         return $this->sex;
     }

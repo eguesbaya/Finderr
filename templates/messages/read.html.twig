@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Finderr | Messenger
-
 {% endblock %}
 
 {% block body %}
     <section class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-12">
                 <h1>Inbox</h1>
-                <p>Inbox synthesis</p>
-                <p>Received : {{ app.user.received|length }}</p>
-                <p>Send : {{ app.user.sent|length }}</p>
+                <h2>{{ message.title }}</h2>
+                <p>Message from {{ message.sender.email }}</p>
+                <p>{{ message.createdAt|date }}</p>
+                <div>{{ message.message }}</div>
                 <a class="btn btn-danger col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
-                <a href="{{ path("send") }}" class="btn btn-danger col-4 offset-1">Send a message</a>
+                <a href="{{ path("received") }}" class="btn btn-danger col-4 offset-1">Return to reception box</a>
             </div>
         </div>
     </section>
@@ -27,10 +27,10 @@
                 <a href="{{ path("messages") }}" class="list-group-item list-group-item-action active">Home</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("received") }}" class="list-group-item list-group-item-action">Reception box</a>
+                <a href="{{ path("received") }}" class="list-group-item list-group-item-action active">Reception box</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("sent") }}" class="list-group-item list-group-item-action">Send messages</a>
+                <a href="{{ path("sent") }}" class="list-group-item list-group-item-action active">Send messages</a>
             </div>
         </div>
     </div>

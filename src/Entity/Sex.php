@@ -22,6 +22,11 @@ class Sex
      */
     private string $name;
 
+    public function __sleep(): array
+    {
+        return [];
+    }
+
     public function getId(): ?int
     {
         return $this->id;
