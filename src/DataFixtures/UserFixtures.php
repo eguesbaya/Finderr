@@ -45,6 +45,7 @@ class UserFixtures extends Fixture
             $coworker->setSex($this->getReference('sex_' . rand(0, 2)));
             $coworker->setMemberSince($faker->dateTimeBetween('2021-01-01 00:00:00', 'now'));
             $coworker->setAge(rand(20, 80));
+            $coworker->setLastname($faker->firstName());
             $coworker->setSkill($this->getReference('skill_' . rand(0, 8)));
             $coworker->setEmail($faker->email());
             $coworker->setRoles(['ROLE_CONTRIBUTOR']);
