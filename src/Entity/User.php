@@ -104,6 +104,22 @@ class User implements UserInterface
      */
     private ?Skill $skill;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="friends")
+     */
+    private $friend;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="friend")
+     */
+    private $friends;
+
+    public function __construct()
+    {
+        $this->friend = new ArrayCollection();
+        $this->friends = new ArrayCollection();
+    }
+
 
 
 /************************************************************************************************** getter setter */
@@ -191,7 +207,7 @@ class User implements UserInterface
 
     public function getSex(): Sex
     {
-        return $this->sex;
+        return $this->sex->getname();
     }
 
     public function setSex(Sex $sex): self
@@ -306,5 +322,37 @@ class User implements UserInterface
         $this->skill = $skill;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFriend(): Collection
+    {
+        return $this->friend;
+    }
+
+    public function addFriend(?self $friend): self
+    {
+        if (!$this->friend->contains($friend)) {
+            $this->friend[] = $friend;
+        }
+
+        return $this;
+    }
+
+    public function removeFriend(self $friend): self
+    {
+        $this->friend->removeElement($friend);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
     }
 }
