@@ -8,8 +8,8 @@
         <div class="row">
             <div class="col-12">
                 <h1>Inbox</h1>
-                <h2>Send elements</h2>
-                <p>You send
+                <h2>Sent elements</h2>
+                <p>You sent
                     {{ app.user.sent|length }}
                     messages</p>
             </div>
@@ -23,7 +23,7 @@
                 {% else %}
                     {% set bold = "" %}
                 {% endif %}
-                <div class="col-6 {{ bold }}">{{ message.sender.email }}</div>
+                <div class="col-6 {{ bold }}">{{ message.sender.lastname }}</div>
                 <div class="col-2 {{ bold }}">
                     <a href="{{ path("read", {id: message.id}) }}"></a>
                     {{ message.title }}</div>
@@ -38,8 +38,8 @@
             {% endfor %}
 
             <div class="col">
-                <a class="btn btn-danger col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
-                <a href="{{ path("send") }}" class="btn btn-danger col-4 offset-1">Send a message</a>
+                <a class="btn btn-danger text-light col-4 offset-1 mt-5" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
+                <a href="{{ path("send") }}" class="btn btn-danger text-light col-4 offset-1 mt-5">Send a message</a>
             </div>
         </div>
     </section>
@@ -56,7 +56,7 @@
                 <a href="{{ path("received") }}" class="mt-2 list-group-item list-group-item-action">Reception box</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action active">Send messages</a>
+                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action active">Sent messages</a>
             </div>
         </div>
     </div>

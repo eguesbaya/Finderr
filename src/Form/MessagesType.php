@@ -29,14 +29,14 @@ class MessagesType extends AbstractType
             ])
             ->add('recipient', EntityType::class, [
                 "class" => User::class,
-                "choice_label" => "email",
+                "choice_label" => "lastname",
                 "attr" => [
                     "class" => "form-control"
                 ]
             ])
             ->add('send', SubmitType::class, [
                 "attr" => [
-                    "class" => "btn btn-danger my-3 col-6 offset-3"
+                    "class" => "btn btn-danger text-light my-3 col-6 offset-3"
                 ]
             ])
         ;

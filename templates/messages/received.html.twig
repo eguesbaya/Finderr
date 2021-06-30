@@ -29,9 +29,9 @@
                 {% else %}
                     {% set bold = "" %}
                 {% endif %}
-        <div class="row border-bottom p-3">
+        <div class="row border-bottom p-3 d-flex align-items-center">
             <div class="col">
-                <img src="uploads/60dadf0a82058.jpg" class="sender-pic m-0 p-0" alt"{{ message.sender.lastname }}" width="200px">
+                <img src="/{{ message.sender.picture }}" class="sender-pic m-0 p-0" alt"{{ message.sender.lastname }}" width="150px">
             </div>
             <div class="col {{ bold }} p-0">
                 <div>{{ message.sender.lastname }}</div>
@@ -49,8 +49,9 @@
         </div>
             {% endfor %}
     </section>
-            <a href="{{ path("send") }}" class="btn btn-success py-3 my-3 d-inline-block">Send a message</a>
-
+    <div class="d-flex justify-content-center mt-4">
+    <a href="{{ path("send") }}" class="btn btn-danger text-light py-3 my-3 d-inline-block">Send a message</a>
+    </div>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h2 class="offcanvas-title" id="offcanvasExampleLabel">My folders</h2>
@@ -64,14 +65,10 @@
                 <a href="{{ path("received") }}" class="mt-2 list-group-item list-group-item-action active">Reception box</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action">Send messages</a>
+                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action">Sent messages</a>
             </div>
         </div>
     </div>
-
-    <section>
-    </section>
-
     <footer class="bg-light d-flex flex-row align-items-center justify-content-evenly text-center p-4">
         <a href="{{ path('home') }}"><svg xmlns="http://www.w3.org/2000/svg"
         width="30"

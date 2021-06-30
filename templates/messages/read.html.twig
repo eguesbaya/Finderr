@@ -9,11 +9,11 @@
             <div class="col-12">
                 <h1>Inbox</h1>
                 <h2>{{ message.title }}</h2>
-                <p>Message from {{ message.sender.email }}</p>
+                <p>Message from {{ message.sender.lastname }}</p>
                 <p>{{ message.createdAt|date }}</p>
                 <div>{{ message.message }}</div>
-                <a class="btn btn-danger col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
-                <a href="{{ path("received") }}" class="btn btn-danger col-4 offset-1">Return to reception box</a>
+                <a class="btn btn-danger text-light col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
+                <a href="{{ path("received") }}" class="btn btn-danger text-light col-4 offset-1">Return to reception box</a>
             </div>
         </div>
     </section>
@@ -30,7 +30,7 @@
                 <a href="{{ path("received") }}" class="mt-2 list-group-item list-group-item-action active">Reception box</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action active">Send messages</a>
+                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action active">Sent messages</a>
             </div>
         </div>
     </div>

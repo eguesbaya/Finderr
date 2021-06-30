@@ -12,8 +12,8 @@
                 <p>Inbox synthesis</p>
                 <p>Received : {{ app.user.received|length }}</p>
                 <p>Send : {{ app.user.sent|length }}</p>
-                <a class="btn btn-success col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
-                <a href="{{ path("send") }}" class="btn btn-danger col-4 offset-1">Send a message</a>
+                <a class="btn btn-danger text-light col-4 offset-1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">See my folders</a>
+                <a href="{{ path("send") }}" class="btn btn-danger text-light col-4 offset-1">Send a message</a>
             </div>
         </div>
     </section>
@@ -30,7 +30,7 @@
                 <a href="{{ path("received") }}" class="mt-2 list-group-item list-group-item-action">Reception box</a>
             </div>
             <div class="list-group">
-                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action">Send messages</a>
+                <a href="{{ path("sent") }}" class="mt-2 list-group-item list-group-item-action">Sent messages</a>
             </div>
         </div>
     </div>
