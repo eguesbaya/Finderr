@@ -7,7 +7,7 @@ parameters:
         - src/DataFixtures
         - src/Security
         - src/Entity
-        - src/Controller/UserController.php
+        - src/Controller
 
     ignoreErrors:
         - '#Call to an undefined method [a-zA-Z0-9\\_]+::findOneBy[A-Z][a-zA-Z]*\(\)#'

@@ -46,7 +46,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Sex::class, cascade={"persist", "remove"})
      */
-    private Sex $sex;
+    private ?Sex $sex;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -105,6 +105,7 @@ class User implements UserInterface
     private ?Skill $skill;
 
     /**
+
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="friends")
      */
     private $friend;
@@ -120,7 +121,15 @@ class User implements UserInterface
         $this->friends = new ArrayCollection();
     }
 
+     * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender", orphanRemoval=true)
+     */
+    private $sent;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="recipient", orphanRemoval=true)
+     */
+    private $received;
 
 /************************************************************************************************** getter setter */
 
@@ -205,7 +214,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getSex(): Sex
+    public function getSex(): ?Sex
     {
         return $this->sex->getname();
     }
@@ -325,6 +334,7 @@ class User implements UserInterface
     }
 
     /**
+
      * @return Collection|self[]
      */
     public function getFriend(): Collection
@@ -336,6 +346,19 @@ class User implements UserInterface
     {
         if (!$this->friend->contains($friend)) {
             $this->friend[] = $friend;
+
+     * @return Collection|Messages[]
+     */
+    public function getSent(): Collection
+    {
+        return $this->sent;
+    }
+
+    public function addSent(Messages $sent): self
+    {
+        if (!$this->sent->contains($sent)) {
+            $this->sent[] = $sent;
+            $sent->setSender($this);
         }
 
         return $this;
@@ -345,14 +368,52 @@ class User implements UserInterface
     {
         $this->friend->removeElement($friend);
 
+    public function removeSent(Messages $sent): self
+    {
+        if ($this->sent->removeElement($sent)) {
+            // set the owning side to null (unless already changed)
+            if ($sent->getSender() === $this) {
+                $sent->setSender(null);
+            }
+        }
+
         return $this;
     }
 
     /**
+
      * @return Collection|self[]
      */
     public function getFriends(): Collection
     {
         return $this->friends;
+
+     * @return Collection|Messages[]
+     */
+    public function getReceived(): Collection
+    {
+        return $this->received;
+    }
+
+    public function addReceived(Messages $received): self
+    {
+        if (!$this->received->contains($received)) {
+            $this->received[] = $received;
+            $received->setRecipient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceived(Messages $received): self
+    {
+        if ($this->received->removeElement($received)) {
+            // set the owning side to null (unless already changed)
+            if ($received->getRecipient() === $this) {
+                $received->setRecipient(null);
+            }
+        }
+
+        return $this;
     }
 }
