@@ -13,10 +13,10 @@
         <div class="card bg-dark text-white">
             <img src="{{ asset('build/images/gettyimages-697564509-612x612.jpg') }}"
                 class="card-img"
-                alt="..." />
+                alt="{{ user.email }}" />
             <div class="card-img-overlay d-flex flex-column justify-content-end">
                 <section class= "p-3">
-                    <div class="d-flex flex-column flex-md-row align-items-start justify-content-evenly m-1">
+                    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-evenly m-1">
                         <h2 class="card-title">
                             {{ user.username }}
                         </h2>
@@ -24,9 +24,13 @@
                             Member since: {{ user.memberSince ? user.memberSince|date('Y') : '' }}
                         </span>
                     </div>
-                    <div class="d-flex flex-row justify-content-evenly">
-                        <span class="badge bg-primary card-text">{{ user.city }}</span>
-                        <span class="badge bg-primary card-text">{{ user.skill.name }}</span>
+                    <div class="d-flex flex-row">
+                        <span class="badge bg-primary card-text m-1">{{ user.city }}</span>
+                        <span class="badge bg-primary card-text m-1">{{ user.age }}yo</span>
+                    </div>
+                    <div class="d-flex flex-row">
+                        <span class="badge bg-secondary card-text m-1">{{ user.skill.name }}</span>
+                        {# <span class="badge bg-secondary card-text m-1">{{ user.skill.level }}</span> #}
                     </div>
                 </section>
                 <section class="d-flex justify-content-center card-icons bg-primary card-text mx-0 mt-2">
@@ -39,8 +43,8 @@
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
                     </svg></a>
                     <a href="{{ path('friend_add', {'id': user.id}) }}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check-circle-fill m-2 link-success" viewBox="0 0 16 16">
-  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-</svg></a>
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg></a>
                 </section>
             </div>
         </div>
@@ -52,15 +56,15 @@
   {% endfor %}
 
   <footer class="bg-light d-flex flex-row align-items-center justify-content-evenly text-center p-4">
-        <svg xmlns="http://www.w3.org/2000/svg"
+        <a href="{{ path('messages') }}"><svg xmlns="http://www.w3.org/2000/svg"
         width="25"
         height="25"
         fill="currentColor"
         class="bi bi-inboxes-fill"
         viewBox="0 0 16 16">
         <path d="M4.98 1a.5.5 0 0 0-.39.188L1.54 5H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0A.5.5 0 0 1 10 5h4.46l-3.05-3.812A.5.5 0 0 0 11.02 1H4.98zM3.81.563A1.5 1.5 0 0 1 4.98 0h6.04a1.5 1.5 0 0 1 1.17.563l3.7 4.625a.5.5 0 0 1 .106.374l-.39 3.124A1.5 1.5 0 0 1 14.117 10H1.883A1.5 1.5 0 0 1 .394 8.686l-.39-3.124a.5.5 0 0 1 .106-.374L3.81.563zM.125 11.17A.5.5 0 0 1 .5 11H6a.5.5 0 0 1 .5.5 1.5 1.5 0 0 0 3 0 .5.5 0 0 1 .5-.5h5.5a.5.5 0 0 1 .496.562l-.39 3.124A1.5 1.5 0 0 1 14.117 16H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .121-.393z" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg"
+        </svg></a>
+        <a href="{{ path('user_index') }}"><svg xmlns="http://www.w3.org/2000/svg"
         width="30"
         height="30"
         fill="currentColor"
@@ -70,6 +74,6 @@
         <path fill-rule="evenodd"
             d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-        </svg>
+        </svg></a>
   </footer>
 {% endblock %}
