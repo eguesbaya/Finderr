@@ -221,7 +221,7 @@ class User implements UserInterface
 
     public function getSex(): ?Sex
     {
-        return $this->sex->getname();
+        return $this->sex;
     }
 
     public function setSex(Sex $sex): self
