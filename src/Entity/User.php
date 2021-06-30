@@ -89,8 +89,8 @@ class User implements UserInterface
      *     "image/jpg",
      *     "image/webp"
      * })
-    * @var File
-    */
+     * @var File
+     */
     private $pictureFile;
 
     /**
@@ -120,7 +120,7 @@ class User implements UserInterface
         $this->friend = new ArrayCollection();
         $this->friends = new ArrayCollection();
     }
-
+    /**
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender", orphanRemoval=true)
      */
     private $sent;
@@ -131,7 +131,7 @@ class User implements UserInterface
      */
     private $received;
 
-/************************************************************************************************** getter setter */
+    /************************************************************************************************** getter setter */
 
     public function getId(): ?int
     {
@@ -150,7 +150,7 @@ class User implements UserInterface
         return $this;
     }
 
-      /**
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -346,7 +346,11 @@ class User implements UserInterface
     {
         if (!$this->friend->contains($friend)) {
             $this->friend[] = $friend;
+        }
 
+        return $this;
+    }
+    /**
      * @return Collection|Messages[]
      */
     public function getSent(): Collection
@@ -368,6 +372,9 @@ class User implements UserInterface
     {
         $this->friend->removeElement($friend);
 
+        return $this;
+    }
+
     public function removeSent(Messages $sent): self
     {
         if ($this->sent->removeElement($sent)) {
@@ -387,7 +394,8 @@ class User implements UserInterface
     public function getFriends(): Collection
     {
         return $this->friends;
-
+    }
+    /**
      * @return Collection|Messages[]
      */
     public function getReceived(): Collection
