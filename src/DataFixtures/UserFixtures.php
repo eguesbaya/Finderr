@@ -12,13 +12,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture
 {
     private $passwordEncoder;
-    public const LOOPNUMBER = 10;
+    public const LOOPNUMBER = 20;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
-    public const LINK_IMAGE = "https://www.fillmurray.com/640/360";
+    public const LINK_IMAGE = 'public/build/images/photos/';
     public const CITY = ['Biarritz',
     'Bordeaux',
     'La Loupe',
@@ -51,10 +51,10 @@ class UserFixtures extends Fixture
             $coworker->setRoles(['ROLE_CONTRIBUTOR']);
             $coworker->setCountry('France');
             $coworker->setCity(self::CITY[rand(0, count(self::CITY) - 1)]);
-            $urlImage = self::LINK_IMAGE;
+            $urlImage = self::LINK_IMAGE . rand(1, 33) . '.jpg';
             $path = uniqid() . '.jpg';
             copy($urlImage, 'public/uploads/' . $path);
-            $imagePath = '/uploads/' . $path;
+            $imagePath = $path;
             $coworker->setPicture($imagePath);
             $coworker->setPassword($this->passwordEncoder->encodePassword(
                 $coworker,
