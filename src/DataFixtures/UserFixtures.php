@@ -54,7 +54,7 @@ class UserFixtures extends Fixture
             $urlImage = self::LINK_IMAGE . rand(1, 33) . '.jpg';
             $path = uniqid() . '.jpg';
             copy($urlImage, 'public/uploads/' . $path);
-            $imagePath = $path;
+            $imagePath = 'uploads/' . $path;
             $coworker->setPicture($imagePath);
             $coworker->setPassword($this->passwordEncoder->encodePassword(
                 $coworker,
