@@ -31,7 +31,7 @@
                 {% endif %}
         <div class="row border-bottom p-3">
             <div class="col">
-                <img src="uploads/60dadf0a82058.jpg" class="sender-pic m-0 p-0" alt"{{ message.sender.lastname }}" width="200px">
+                <img src="{{ message.sender.picture }}" class="sender-pic m-0 p-0" alt"{{ message.sender.lastname }}" width="200px">
             </div>
             <div class="col {{ bold }} p-0">
                 <div>{{ message.sender.lastname }}</div>
