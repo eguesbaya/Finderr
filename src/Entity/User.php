@@ -105,9 +105,26 @@ class User implements UserInterface
     private ?Skill $skill;
 
     /**
+
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="friends")
+     */
+    private $friend;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="friend")
+     */
+    private $friends;
+
+    public function __construct()
+    {
+        $this->friend = new ArrayCollection();
+        $this->friends = new ArrayCollection();
+    }
+
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="sender", orphanRemoval=true)
      */
     private $sent;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Messages::class, mappedBy="recipient", orphanRemoval=true)
@@ -199,7 +216,7 @@ class User implements UserInterface
 
     public function getSex(): ?Sex
     {
-        return $this->sex;
+        return $this->sex->getname();
     }
 
     public function setSex(Sex $sex): self
@@ -317,6 +334,19 @@ class User implements UserInterface
     }
 
     /**
+
+     * @return Collection|self[]
+     */
+    public function getFriend(): Collection
+    {
+        return $this->friend;
+    }
+
+    public function addFriend(?self $friend): self
+    {
+        if (!$this->friend->contains($friend)) {
+            $this->friend[] = $friend;
+
      * @return Collection|Messages[]
      */
     public function getSent(): Collection
@@ -334,6 +364,10 @@ class User implements UserInterface
         return $this;
     }
 
+    public function removeFriend(self $friend): self
+    {
+        $this->friend->removeElement($friend);
+
     public function removeSent(Messages $sent): self
     {
         if ($this->sent->removeElement($sent)) {
@@ -347,6 +381,13 @@ class User implements UserInterface
     }
 
     /**
+
+     * @return Collection|self[]
+     */
+    public function getFriends(): Collection
+    {
+        return $this->friends;
+
      * @return Collection|Messages[]
      */
     public function getReceived(): Collection
