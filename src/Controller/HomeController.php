@@ -17,8 +17,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->findBy(['id' => rand(11, 20)]);
-
+        $user = $this->getDoctrine()->getRepository(User::class)->findBy(['id' => rand(1, 18)]);
         return $this->render('home/index.html.twig', ['users' => $user]);
     }
 }
