@@ -131,6 +131,11 @@ class User implements UserInterface
      */
     private $received;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
+
     /************************************************************************************************** getter setter */
 
     public function getId(): ?int
@@ -421,6 +426,18 @@ class User implements UserInterface
                 $received->setRecipient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }
