@@ -7,8 +7,8 @@
     <section class="container">
         <div class="row">
             <div class="col-12">
-                <h1>Inbox</h1>
-                <h2>Reception box</h2>
+                <h1>Messages</h1>
+
                 <p>You received
                     {{ app.user.received|length }}
                     messages</p>
@@ -23,7 +23,7 @@
                 {% else %}
                     {% set bold = "" %}
                 {% endif %}
-                <div class="col-6 {{ bold }}">{{ message.sender.email }}</div>
+                <div class="col-6 sender-picture {{ bold }}">{{ message.sender.picture }}</div>
                 <div class="col-2 {{ bold }}">
                     <a href="{{ path("read", {id: message.id}) }}">
                     {{ message.title }}</a>
