@@ -63,6 +63,6 @@ class UserController extends AbstractController
             $this->getUser()->addFriend($friend);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index');
+            return $this->redirectToRoute('home');
     }
 }
