@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
-use App\Form\SearchType;
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +13,12 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @return Response
      */
-    public function index(UserRepository $repository, Request $request): Response
+    public function index(): Response
     {
-        $data = new SearchData();
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $user = $repository->findSearch($data);
+        $user = $this->getDoctrine()->getRepository(User::class)->findBy(['id' => rand(0, 8)]);
 
-        return $this->render('home/index.html.twig', ['users' => $user,'form' => $form->createView()]);
+        return $this->render('home/index.html.twig', ['users' => $user]);
     }
 }

@@ -27,7 +27,6 @@ class UserController extends AbstractController
             'user' => $this->getUser(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
